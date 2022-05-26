@@ -40,24 +40,26 @@ void DSNV::Input()
 
 void DSNV::Output()
 {
-	double max = ds_nv[0]->tongluong();
-	for (int i = 0; i < sonv; i++) {
-		for (int j = 0; j < sonv - i; j++) {
-			if (ds_nv[i]->tongluong() < ds_nv[j]->tongluong())
-			{
-				swap(ds_nv[i], ds_nv[j]);
-			};
+	if (sonv > 0) {
+		double max = ds_nv[0]->tongluong();
+		for (int i = 0; i < sonv-1; i++) {
+			for (int j = sonv-1; j >i ; j--) {
+				if (ds_nv[i]->tongluong() < ds_nv[j]->tongluong())
+				{
+					swap(ds_nv[i], ds_nv[j]);
+				};
+			}
 		}
+		cout << "tong so nhan vien: " << sonv << "\n";
+		for (int i = 0; i < sonv; i++) {
+			cout << "\n" << "thong tin nhan vien thu " << i + 1 << "\n";
+			ds_nv[i]->Output();
+			cout << "\n" << "luong = ";
+			cout << ds_nv[i]->tongluong();
+			if (max < ds_nv[i]->tongluong())
+				max = ds_nv[i]->tongluong();
+		}cout << "\n" << "luong cao nhat: " << max;
 	}
-	cout << "tong so nhan vien: " << sonv << "\n";
-	for (int i = 0; i < sonv; i++) {
-		cout << "\n" << "thong tin nhan vien thu " << i + 1 << "\n";
-		ds_nv[i]->Output();
-		cout << "\n" << "luong = ";
-		cout << ds_nv[i]->tongluong();
-		if (max < ds_nv[i]->tongluong())
-			max = ds_nv[i]->tongluong();
-	}cout << "\n" << "luong cao nhat: " << max;
 }
 
 
